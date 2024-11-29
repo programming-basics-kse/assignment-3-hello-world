@@ -19,8 +19,35 @@ with (open(args.input_file, "rt") as file):
         all_lines.append(l)
 
     if args.interactive:
-        country = input("Enter the name of the country: ")
-        args.countries = country
+        country1 = input("Enter the name of the country: ")
+        dic_of_the_c = {}
+        list_of_y = []
+        suc = 0
+        year_of_suc = 0
+        for l in all_lines:
+            if l[14] != "NA":
+                if country1 in l[6]:
+                    if l[9] in list_of_y:
+                        dic_of_the_c[l[9]] += f", {l[14]}"
+                    else:
+                        dic_of_the_c[l[9]] = l[14]
+                        list_of_y.append(l[9])
+
+                    for y in list_of_y:
+                        dic = dic_of_the_c[y].split(",")
+
+                        if len(dic) >= suc:
+                            suc = len(dic)
+                            year_of_suc = y
+        print(f"In {year_of_suc} {country1} had {suc} medals. It is the biggest amount of medals in {country1}'s history")
+
+    for i in range(0, len(list_of_y)-1):
+        if list_of_y[i] <= list_of_y[i+1]:
+            first = list_of_y[i]
+        else:
+            first = list_of_y[i+1]
+    print(f"In {first} {country1} was on olimpic at first time.")
+
 
     list_of_p = ["Gold", "Silver", "Bronze"]
     if args.medals:
@@ -55,7 +82,6 @@ with (open(args.input_file, "rt") as file):
             list_of_y =[]
             suc = 0
             year_of_suc = 0
-            dic_of_the_c.update({e:1})
             for l in all_lines:
                 if l[14] != "NA":
                     if e in l[6]:
@@ -71,7 +97,7 @@ with (open(args.input_file, "rt") as file):
                             if len(dic) >= suc:
                                 suc = len(dic)
                                 year_of_suc = y
-            print(f"In {year_of_suc} {e} had {suc} medals")
+            print(f"In {year_of_suc} {e} had {suc} medals. It is the biggest amount of medals in {e}'s history")
 
 
 
