@@ -42,7 +42,7 @@ with (open(args.input_file, "rt") as file):
         print(f"In {year_of_suc} {country1} had {suc} medals. It is the biggest amount of medals in {country1}'s history")
 
     for i in range(0, len(list_of_y)-1):
-        if list_of_y[i] <= list_of_y[i+1]:
+        if int(list_of_y[i]) <= int(list_of_y[i+1]):
             first = list_of_y[i]
         else:
             first = list_of_y[i+1]
