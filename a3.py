@@ -17,7 +17,6 @@ with (open(args.input_file, "rt") as file):
         for i in range(0,len(split)):
             l.append(split[i])
         all_lines.append(l)
-    print(l)
 
     if args.interactive:
         country = input("Enter the name of the country: ")
@@ -47,38 +46,36 @@ with (open(args.input_file, "rt") as file):
                     else:
                         dic_of_the_year[l[6]] = l[14]
                         list_of_c.append(l[6])
-                    print(dic_of_the_year)
+        print(dic_of_the_year)
 
 
-    list_of_years = []
     if args.overall:
-        for l in all_lines:
-            year = []
-            if l[7] == args.countries:
-                if l[len(l)-1] != "NA":
-                    if year not in list_of_years:
-                        year = [l[9], l[len(l)-1]]
-                        list_of_years.append(year)
-        n =0
-        for n in range(0,len(list_of_years)-2):
-            if n >= len(list_of_years) or n == len(list_of_years):
-                break
-            if list_of_years[n][0] == list_of_years[n+1][0]:
-                list_of_years[n].append(list_of_years[n+1][1])
-                list_of_years.remove(list_of_years[n+1])
-        print(list_of_years)
-        final = 0
-        num =0
-        year_of_max = []
-        for y in list_of_years:
-            if len(y) >= num:
-                year_of_max.clear()
-                final = y[0]
-                num = len(y)
-            if len(y) == num:
-                year_of_max.append(y[0])
-                final = f"We have a lot of years with {num-1} medals. For example:{year_of_max}"
-        print(final)
+        for e in args.overall:
+            dic_of_the_c = {}
+            list_of_y =[]
+            suc = 0
+            year_of_suc = 0
+            dic_of_the_c.update({e:1})
+            for l in all_lines:
+                if l[14] != "NA":
+                    if e in l[6]:
+                        if l[9] in list_of_y:
+                            dic_of_the_c[l[9]] += f", {l[14]}"
+                        else:
+                            dic_of_the_c[l[9]] = l[14]
+                            list_of_y.append(l[9])
+
+                        for y in list_of_y:
+                            dic = dic_of_the_c[y].split(",")
+
+                            if len(dic) >= suc:
+                                suc = len(dic)
+                                year_of_suc = y
+            print(f"In {year_of_suc} {e} had {suc} medals")
+
+
+
+
 
 
 
