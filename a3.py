@@ -41,12 +41,12 @@ with (open(args.input_file, "rt") as file):
                             year_of_suc = y
         print(f"In {year_of_suc} {country1} had {suc} medals. It is the biggest amount of medals in {country1}'s history")
 
-    for i in range(0, len(list_of_y)-1):
-        if int(list_of_y[i]) <= int(list_of_y[i+1]):
+        for i in range(0, len(list_of_y)-1):
+            if int(list_of_y[i]) <= int(list_of_y[i+1]):
             first = list_of_y[i]
-        else:
-            first = list_of_y[i+1]
-    print(f"In {first} {country1} was on olimpic at first time.")
+            else:
+                first = list_of_y[i+1]
+        print(f"In {first} {country1} was on olimpic at first time.")
 
 
     list_of_p = ["Gold", "Silver", "Bronze"]
